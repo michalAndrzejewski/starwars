@@ -17,7 +17,7 @@
         <th>Date downloaded</th>
         {% for file in files %}
         <tr>
-            <td>{{file.filename}}</td>
+            <td><a href="{% url 'single_collection' file.id %}">{{file.filename}}</a></td>
             <td>{{file.download_date}}</td>
         </tr>
         {% endfor %}

@@ -1,16 +1,16 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 
 from .models import Metadata
 
-from .utils.operations import download_data_from_api
+from .utils.operations import download_data_from_api, convert_from_csv
 
 
-def people(request):
-    return render(request, 'core/people.html')
+def homepage(request):
+    return render(request, 'core/home.html')
 
 
 def collections(request):
-    files = Metadata.objects.all()
+    files = Metadata.objects.all().order_by('-id')
     context = {
         'files': files
     }
@@ -19,6 +19,20 @@ def collections(request):
 
 def download_data(request):
     filename, download_date = download_data_from_api()
+    Metadata.objects.create(
+        filename=filename,
+        download_date=download_date
+    )
+    return redirect('collections')
 
-    return render(request, 'core/collections.html')
+
+def single_collection(request, pk):
+    collection = Metadata.objects.get(id=pk)
+    people_data = convert_from_csv(collection.filename)
+
+    context = {
+        'collection': collection,
+        'people': people_data
+    }
+    return render(request, 'core/single_collection.html', context)
 
