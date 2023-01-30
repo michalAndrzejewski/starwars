@@ -17,7 +17,7 @@ def generate_filename():
     return f'{filename}.csv', today
 
 
-def download_data(request):
+def download_data_from_api():
     data = handler().json()
     path = 'data/'
     filename, download_date = generate_filename()
@@ -47,4 +47,6 @@ def download_data(request):
         filename=filename,
         download_date=download_date
     )'''
-    return filename, download_date, request
+
+    # these are new updates
+    return filename, download_date
