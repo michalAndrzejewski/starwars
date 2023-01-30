@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'main.html' %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Height</th>
+    <th>Mass</th>
+    <th>Hair color</th>
+    <th>Skin color</th>
+    <th>Eye color</th>
+    <th>Birth year</th>
+    <th>Gender</th>
+    <th>Homeworld</th>
+  </tr>
+
+    <h2>{{collection.filename}}</h2>
+    <a href="{% url 'collections' %}"><button type="button" class="btn btn-primary">Back</button></a>
+    {% for person in people %}
+    <tr>
+      {% for person_detail in person %}
+        <td>{{person_detail}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock content %}
+</body>
+</html>
