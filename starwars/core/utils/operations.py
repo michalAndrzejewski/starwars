@@ -48,5 +48,4 @@ def download_data_from_api():
         download_date=download_date
     )'''
 
-    # these are new updates
     return filename, download_date
