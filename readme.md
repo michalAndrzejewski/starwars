@@ -11,6 +11,7 @@ an overriding of some other function, generated error and took time to find.
 
 - Deleting a file in the system should automatically remove the csv file 
 from the place where file is stored - using signals;
+- Additional tests should be added for functions in operations.py
 - Warning 'DateTimeField Metadata.download_date received a naive datetime 
 - (2023-01-30 19:32:37.361895) while time zone support is active.' 
 should be resolved;
