@@ -48,7 +48,7 @@ In order to fully work, dot might be necessary to remove.
 ###### Time:
 Planning ~ 1h
 
-Coding ~ 5h 
+Coding ~ 7h 
 
 
 
