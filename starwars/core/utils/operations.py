@@ -6,9 +6,11 @@ import requests
 import csv
 from datetime import datetime
 import os
+import petl as etl
 
 PEOPLE_API = 'https://swapi.dev/api/people/'
 CSV_FILES_DIR = f'{os.path.abspath(os.path.dirname(os.path.dirname(__file__)))}/utils/data/'
+CSV_HEADERS = ['name', 'height', 'mass', 'hair_color', 'skin_color', 'eye_color', 'birth_year', 'gender', 'homeworld']
 
 
 def handler():  # taken from the API
@@ -21,6 +23,11 @@ def generate_filename():
     filename = today.strftime('%Y%d%m%H%M%S%f')[:-5]  # removing redundant characters - purpose to make a file unique
 
     return f'{filename}.csv', today
+
+
+def get_homeworld(url):
+    res = requests.get(url)
+    return res.json()['name']
 
 
 def download_data_from_api():
@@ -41,7 +48,7 @@ def download_data_from_api():
                 f'{line["eye_color"].replace(",", "_")},'
                 f'{line["birth_year"]},'
                 f'{line["gender"]},'
-                f'{line["homeworld"]}')
+                f'{get_homeworld(line["homeworld"])}')
             file.write('\n')
     except Exception as e:
         print(e)
@@ -58,3 +65,13 @@ def convert_from_csv(filename):
     file.close()
 
     return data
+
+
+def get_value_count(filename):
+    dict_values = {}
+    data = convert_from_csv(filename)
+    data.insert(0, CSV_HEADERS)
+    value_count = etl.valuecounter(data, 'homeworld')
+    for person in value_count:
+        dict_values[person] = value_count[person]
+    return dict_values
