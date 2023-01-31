@@ -9,6 +9,8 @@
 
 {% block content %}
 
+<h2>{{collection.filename}}</h2>
+
 <table>
   <tr>
     <th>Name</th>
@@ -21,8 +23,6 @@
     <th>Gender</th>
     <th>Homeworld</th>
   </tr>
-
-    <h2>{{collection.filename}}</h2>
     <a href="{% url 'collections' %}"><button type="button" class="btn btn-primary">Back</button></a>
     {% for person in people %}
     <tr>
@@ -33,6 +33,22 @@
     {% endfor %}
 
 </table>
+
+<table>
+  <tr>
+    <th>Homeworld</th>
+    <th>Count</th>
+  </tr>
+    {% for key, value in value_count.items %}
+    <tr>
+        <td>{{key}}</td>
+        <td>{{value}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
 {% endblock content %}
+
 </body>
 </html>

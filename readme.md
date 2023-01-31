@@ -4,6 +4,7 @@ Functionality of going through files with data is provided.
 
 ###### Programmers limitations and problems that took time:
 
+- I wasn't able to create 'load more' button
 - in views file, one of functions was called 'download', which caused 
 an overriding of some other function, generated error and took time to find.
 
@@ -11,6 +12,9 @@ an overriding of some other function, generated error and took time to find.
 
 - Deleting a file in the system should automatically remove the csv file 
 from the place where file is stored - using signals;
+- Additional tests should be added for functions in operations.py
+- After adding second API call, app slowed, 
+improving might be necessary (if possible)
 - Warning 'DateTimeField Metadata.download_date received a naive datetime 
 - (2023-01-30 19:32:37.361895) while time zone support is active.' 
 should be resolved;
@@ -34,8 +38,17 @@ from .models import Metadata
 
 In order to fully work, dot might be necessary to remove.
 
+
+###### 31.01.2023 Update
+
+- Added resolving the homeworld field into name
+- Added 'homeworld' items count
+
+
 ###### Time:
 Planning ~ 1h
 
 Coding ~ 5h 
+
+
 
