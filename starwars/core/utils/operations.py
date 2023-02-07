@@ -5,7 +5,6 @@ Functions that operate on csv files
 import requests
 import csv
 from datetime import datetime
-import time
 import os
 import petl as etl
 
