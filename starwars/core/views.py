@@ -4,6 +4,7 @@ from .models import Metadata
 
 from .utils.operations import download_data_from_api, convert_from_csv, get_value_count
 
+ROWS_VALUE = 3
 
 def homepage(request):
     return render(request, 'core/home.html')
