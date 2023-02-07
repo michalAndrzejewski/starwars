@@ -14,6 +14,7 @@ CSV_FILES_DIR = f'{os.path.abspath(os.path.dirname(os.path.dirname(__file__)))}/
 CSV_HEADERS = ['name', 'height', 'mass', 'hair_color', 'skin_color', 'eye_color', 'birth_year', 'gender', 'homeworld']
 HOMEWORLD_DICT = {}  # dictionary created in purpose of speeding up the get_homeworld function
 
+
 def handler():  # taken from the API
     res = requests.get(PEOPLE_API)
     return res
@@ -21,7 +22,7 @@ def handler():  # taken from the API
 
 def generate_filename():
     today = datetime.today()
-    filename = today.strftime('%Y%d%m%H%M%S%f')[:-5]  # removing redundant characters - purpose to make a file unique
+    filename = today.strftime('%Y%m%d%H%M%S%f')[:-5]  # removing redundant characters - purpose to make a file unique
 
     return f'{filename}.csv', today
 
@@ -40,7 +41,7 @@ def download_data_from_api():
     data = handler().json()
     filename, download_date = generate_filename()
     file = f'{CSV_FILES_DIR}{filename}'
-
+    status = False
     '''start_time = time.time()  # start time to measure the code'''
     try:
         file = open(file, 'w')
@@ -56,13 +57,12 @@ def download_data_from_api():
                 f'{line["gender"]},'
                 f'{get_homeworld(line["homeworld"])}')
             file.write('\n')
-
     except Exception as e:
-        print(e)
         raise Exception(e)
     '''print(f'{time.time() - start_time} seconds')  # print time of download'''
+    status = True
 
-    return filename, download_date
+    return filename, download_date, status
 
 
 def convert_from_csv(filename):

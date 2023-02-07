@@ -19,7 +19,7 @@ def collections(request):
 
 
 def download_data(request):
-    filename, download_date = download_data_from_api()
+    filename, download_date, status = download_data_from_api()
     Metadata.objects.create(
         filename=filename,
         download_date=download_date
